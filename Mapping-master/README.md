@@ -41,6 +41,8 @@ $ cd project-dir/src
 
 # Compile the CPU version of the code
 $ g++ -std=c++11 CPU_main.cpp -o CPU_main -lrealsense2 -lboost_iostreams -lboost_system -lboost_filesystem `pkg-config opencv --cflags --libs` -lpthread
+# If not work due to the version of realsense-SDK and opencv, use this command
+$ g++ -std=c++11 CPU_main.cpp -o Cpu_main  -lboost_iostreams -lboost_system -lboost_filesystem `pkg-config --libs opencv4` `pkg-config --cflags opencv4` `pkg-config --libs realsense2` `pkg-config --cflags realsense2` -lpthread
 ```
 
 3. Compile the GPU version of the code if applicable. CUDA version > 8.0 is required, and NVIDIA GPU should have compute capability > 2.0
@@ -48,6 +50,8 @@ $ g++ -std=c++11 CPU_main.cpp -o CPU_main -lrealsense2 -lboost_iostreams -lboost
 ```
 # Compile the GPU version of the code
 $ nvcc -std=c++11 GPU_main.cu -o GPU_main -lrealsense2 -lboost_iostreams -lboost_system -lboost_filesystem `pkg-config opencv --cflags --libs` -lpthread -Wno-deprecated-gpu-targets
+# If not work due to the version of realsense-SDK and opencv, use this command
+$ nvcc -std=c++11 CPU_main.cpp -o Cpu_main  -lboost_iostreams -lboost_system -lboost_filesystem `pkg-config --libs opencv4` `pkg-config --cflags opencv4` `pkg-config --libs realsense2` `pkg-config --cflags realsense2` -lpthread
 ```
 
 4. Connect both the cameras and run the code.
